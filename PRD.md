@@ -1,12 +1,12 @@
-# Medigeni - Application Web Progressive de Santé Numérique
+# Medigeni - Application Mobile de Santé Numérique
 
 ## 1. Vue d'Ensemble du Projet
 
-Medigeni est une Application Web Progressive (PWA) moderne de santé numérique qui combine des outils médicaux assistés par intelligence artificielle avec une plateforme de mise en relation entre patients et professionnels de santé. L'application offre une expérience utilisateur fluide et intuitive pour la gestion de la santé personnelle et la coordination des soins médicaux.
+Medigeni est une application mobile native moderne de santé numérique qui combine des outils médicaux assistés par intelligence artificielle avec une plateforme de mise en relation entre patients et professionnels de santé. L'application offre une expérience utilisateur fluide et intuitive pour la gestion de la santé personnelle et la coordination des soins médicaux sur iOS et Android.
 
 ## 2. Objectifs du Projet
 
-- **Objectif Principal :** Fournir une solution complète de santé numérique accessible via navigateur web avec une expérience utilisateur optimale.
+- **Objectif Principal :** Fournir une solution mobile complète de santé numérique pour iOS et Android avec une expérience utilisateur optimale.
 - **Objectifs Secondaires :**
   - Démontrer l'intégration d'intelligence artificielle dans le domaine médical
   - Faciliter la communication patient-médecin via un système de rendez-vous
@@ -74,41 +74,48 @@ Medigeni est une Application Web Progressive (PWA) moderne de santé numérique 
 
 ### 4.1. Stack Technologique
 
-- **Frontend Framework :** React avec TypeScript
-- **Styling :** Tailwind CSS
+- **Framework Mobile :** Flutter (Dart)
+- **Styling :** Material Design & Cupertino Widgets
 - **Intelligence Artificielle :** Google Gemini API
-- **Type de Déploiement :** Progressive Web App (PWA)
+- **Plateformes :** iOS et Android
 
 ### 4.2. Structure du Projet
 
 ```
-src/
-├── components/       # Composants réutilisables
-│   ├── Layout       # Structure de page
-│   ├── Navbar       # Navigation
-│   ├── Modals       # Fenêtres contextuelles
-│   └── Cards        # Éléments de carte
-├── pages/           # Vues principales (routes)
-│   ├── Home
-│   ├── Dashboard
-│   └── Tools
-├── services/        # Logique métier externe
-│   ├── API Gemini
-│   └── Mock Data
-├── context/         # Gestion d'état global
-│   ├── AuthContext
-│   ├── MedicalContext
-│   └── UIContext
-└── types.ts         # Définitions TypeScript
+lib/
+├── main.dart                # Point d'entrée de l'application
+├── app.dart                 # Configuration MaterialApp
+├── src/
+    ├── features/            # Structure basée sur les fonctionnalités
+    │   ├── authentication/
+    │   │   ├── data/        # Modèles et providers
+    │   │   ├── domain/      # Logique métier
+    │   │   └── presentation/ # Screens et widgets
+    │   ├── home/
+    │   ├── tools/
+    │   └── dashboard/
+    ├── common/              # Widgets partagés
+    │   ├── widgets/         # Composants réutilisables
+    │   ├── constants/       # Constantes de l'app
+    │   └── utils/           # Utilitaires
+    ├── services/            # Services externes
+    │   ├── gemini_service.dart
+    │   └── mock_data.dart
+    ├── providers/           # Gestion d'état (Provider/Riverpod)
+    │   ├── auth_provider.dart
+    │   ├── medical_provider.dart
+    │   └── ui_provider.dart
+    └── models/              # Modèles de données
+        └── types.dart
 ```
 
 ### 4.3. Gestion de l'État Global
 
-L'application utilise l'API Context de React divisée en trois contextes spécialisés :
+L'application utilise un système de gestion d'état (Provider/Riverpod) divisé en trois providers spécialisés :
 
-- **AuthContext :** Gestion de l'authentification et des sessions
-- **MedicalContext :** Base de données temps réel côté client pour les données de santé et rendez-vous
-- **UIContext :** Contrôle de l'interface utilisateur et des modals
+- **AuthProvider :** Gestion de l'authentification et des sessions
+- **MedicalProvider :** Base de données temps réel côté client pour les données de santé et rendez-vous
+- **UIProvider :** Contrôle de l'interface utilisateur et des dialogues/modals
 
 ### 4.4. Architecture Modulaire
 
@@ -121,32 +128,35 @@ L'application utilise l'API Context de React divisée en trois contextes spécia
 
 ### 5.1. Design Responsive
 
-- Adaptation automatique mobile/tablette/desktop
-- Utilisation des classes utilitaires Tailwind
-- Grille flexible et points de rupture optimisés
+- Adaptation automatique mobile/tablette
+- Utilisation des widgets Flutter responsifs (MediaQuery, LayoutBuilder)
+- Design adaptatif selon la taille d'écran
+- Support des orientations portrait et paysage
 
 ### 5.2. Mode Sombre
 
-- Implémentation native du dark mode
-- Basculement fluide entre thèmes
-- Classes conditionnelles Tailwind
+- Implémentation native du ThemeMode (light/dark)
+- Basculement fluide entre thèmes via ThemeData
+- Support des préférences système
 
 ### 5.3. Feedback Visuel
 
-- Indicateurs de chargement pendant les opérations IA
-- Animations et transitions fluides
-- États de validation et messages d'erreur clairs
+- Indicateurs de chargement (CircularProgressIndicator) pendant les opérations IA
+- Animations et transitions fluides (Hero, AnimatedContainer)
+- SnackBars et Dialogs pour les états de validation et messages d'erreur
+- Feedback haptique pour les interactions importantes
 
 ## 6. Intégration de l'Intelligence Artificielle
 
 ### 6.1. Service Gemini Centralisé
 
-Le fichier `services/geminiService.ts` gère toutes les interactions avec l'API Google Gemini :
+Le fichier `services/gemini_service.dart` gère toutes les interactions avec l'API Google Gemini :
 
 - **Instructions Système :** Prompts spécifiques pour chaque fonctionnalité
 - **Gestion de l'Historique :** Conservation du contexte conversationnel
 - **Réponses Structurées :** Formatage cohérent des résultats IA
 - **Gestion des Erreurs :** Fallbacks et messages appropriés
+- **Appels Asynchrones :** Utilisation de Future et async/await
 
 ### 6.2. Cas d'Usage de l'IA
 
@@ -173,10 +183,11 @@ L'architecture est prête pour une intégration backend réelle :
 
 ## 8. Prérequis et Installation
 
-- Node.js (version recommandée : 18+)
-- npm ou yarn
+- Flutter SDK (version recommandée : 3.16+)
+- Dart SDK
+- Android Studio / Xcode (pour le développement iOS)
 - Clé API Google Gemini
-- Navigateur moderne compatible PWA
+- Émulateurs/simulateurs iOS et Android ou appareils physiques
 
 ## 9. Cas d'Usage Principaux
 
@@ -188,21 +199,24 @@ L'architecture est prête pour une intégration backend réelle :
 
 ## 10. Points Techniques Notables
 
-- **Workflow de Rendez-vous Complexe :** Interaction sophistiquée entre plusieurs contextes
+- **Workflow de Rendez-vous Complexe :** Interaction sophistiquée entre plusieurs providers
 - **Authentification Dynamique :** Inscription avec ajout temps réel au système
-- **Synchronisation d'État :** Mise à jour instantanée entre composants via contextes
+- **Synchronisation d'État :** Mise à jour instantanée entre écrans via providers
 - **Architecture Sans Backend :** Démonstration complète avec services simulés
+- **Navigation Déclarative :** Utilisation de Navigator 2.0 ou Go Router
 
 ## 11. Perspectives d'Évolution
 
 Cette architecture modulaire facilite l'ajout de :
 
-- Persistance des données avec base de données réelle
-- Système de notifications en temps réel
-- Intégration de paiements pour consultations
-- Téléconsultation vidéo
+- Persistance des données avec base de données réelle (SQLite, Hive, Firebase)
+- Système de notifications push (Firebase Cloud Messaging)
+- Intégration de paiements pour consultations (Stripe, PayPal)
+- Téléconsultation vidéo (Agora, WebRTC)
 - Dossier médical électronique complet
-- Tests unitaires et d'intégration
+- Tests unitaires, widgets et d'intégration
+- Localisation multilingue (i18n)
+- Mode hors ligne avec synchronisation
 
 ---
 
