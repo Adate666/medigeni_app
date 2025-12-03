@@ -1,5 +1,11 @@
 # Medigeni - Application Mobile de Santé Numérique
 
+<img width="492" height="757" alt="medi0" src="https://github.com/user-attachments/assets/5f9284e1-68ab-45f2-8203-c02bec1c0078" />
+<img width="499" height="763" alt="medi_admin_dash" src="https://github.com/user-attachments/assets/3b032f52-907b-4698-938d-2ae1e725d9e6" />
+<img width="498" height="766" alt="medi_dashboard_patient" src="https://github.com/user-attachments/assets/0a9cf18a-e06d-410c-b04b-ae10575b0016" />
+<img width="499" height="761" alt="medi_dashboard_medecin" src="https://github.com/user-attachments/assets/ac6ebc4a-712f-471c-ae75-bc354409db0a" />
+
+
 ## 1. Vue d'Ensemble du Projet
 
 Medigeni est une application mobile native moderne de santé numérique qui combine des outils médicaux assistés par intelligence artificielle avec une plateforme de mise en relation entre patients et professionnels de santé. L'application offre une expérience utilisateur fluide et intuitive pour la gestion de la santé personnelle et la coordination des soins médicaux sur iOS et Android.
